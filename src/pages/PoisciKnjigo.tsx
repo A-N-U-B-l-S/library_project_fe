@@ -8,8 +8,7 @@ const PoisciKnjigo = () => {
 
     const[imeKnjige, setImeKnjige] = useState('');
     const [redirect, setRedirect] = useState(false);
-    const [cards, setCards] =
-        useState([]);
+    const [cards, setCards] = useState([]);
 
     const submit = async (e : SyntheticEvent) => {
         e.preventDefault();

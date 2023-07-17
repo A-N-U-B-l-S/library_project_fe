@@ -70,16 +70,11 @@
   z-index: 1500;
 }
 
-test_div{
-  background-color: red;
-}
-
 footer{
   margin-top:-1rem;
   margin-bottom:1rem;
   font-size:.875em;
   color:#6c757d;
   max-height: max-content;
-  background-color: green;
 }
 

@@ -18,7 +18,7 @@ function App() {
                     <Route path={'/register'} element={<Register/>} />
                     <Route path={'/poisciknjigo'} element={<PoisciKnjigo/>} />
                     <Route path={'/login'} element={<Login/>} />
-                    <Route path={'/izposoja'} element={<Izposoja/>} />
+                    <Route path={'/izposoja/:isbn'} element={<Izposoja/>} />
                 </Routes>
             </BrowserRouter>
         </Wrapper>

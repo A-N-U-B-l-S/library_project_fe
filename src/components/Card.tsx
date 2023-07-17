@@ -1,28 +1,23 @@
-import { useNavigate } from 'react-router-dom';
+import {useNavigate} from "react-router-dom";
 
-interface CardProps {
-    cardData: {
-        knjiga_izvod_naslov: string;
-        knjiga_izvod_isbn: string;
-    };
-    navigation: any; // Add the navigation prop
-}
-const Card: React.FC<CardProps> = ({navigation, cardData}) => {
 
-    const navigations = useNavigate();
 
-    const handleIzposojaClick = () => {
-        navigation.navigate('/izposoja', {
-            knjiga_naslov: cardData.knjiga_izvod_naslov,
-            isbn: cardData.knjiga_izvod_isbn,
-        });
-    };
+const Card = ({cardData}) => {
 
-    const handleIzposojaClick1 = () => {
+    const navigation = useNavigate();
+
+    const toIzposoja = () => {
+        navigation(`/izposoja/${cardData.knjiga_izvod_isbn}`);
+        //console.log(cardData)
+        //knjiga.map((cards:any)=>{null})
+    }
+
+
+    /*const handleIzposojaClick1 = () => {
         const { knjiga_izvod_naslov, knjiga_izvod_isbn } = cardData;
         //navigation(`/izposoja/${knjiga_izvod_naslov}/${knjiga_izvod_isbn}`);
         navigations(`/izposoja?naslov=${knjiga_izvod_naslov}&isbn=${knjiga_izvod_isbn}`);
-    };
+    };*/
 
     return (
         <>
@@ -39,9 +34,9 @@ const Card: React.FC<CardProps> = ({navigation, cardData}) => {
                         <div className="btn-group">
                             <div className="btn-group1">
                                 <div>
-                                    <a href="/izposoja" type="button"
+                                    <a type="button"
                                        className="btn btn-sm btn-outline-secondary"
-                                        onClick={handleIzposojaClick}>Izposoja
+                                        onClick={toIzposoja}>Izposoja
                                     </a>
                                 </div>
                                 <div>
