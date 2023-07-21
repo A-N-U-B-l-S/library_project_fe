@@ -7,6 +7,8 @@ import Register from "./pages/Register.tsx";
 import PoisciKnjigo from "./pages/PoisciKnjigo.tsx";
 import Login from "./pages/Login.tsx";
 import Izposoja from "./pages/Izposoja.tsx";
+import Rezervacija from "./pages/Rezervacija.tsx";
+import UserData from "./pages/UserData.tsx";
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
                     <Route path={'/poisciknjigo'} element={<PoisciKnjigo/>} />
                     <Route path={'/login'} element={<Login/>} />
                     <Route path={'/izposoja/:isbn'} element={<Izposoja/>} />
+                    <Route path={'/rezervacija/:isbn'} element={<Rezervacija/>} />
+                    <Route path={'/userdata'} element={<UserData/>} />
                 </Routes>
             </BrowserRouter>
         </Wrapper>

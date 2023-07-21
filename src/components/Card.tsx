@@ -10,12 +10,9 @@ const Card = ({cardData}) => {
         //knjiga.map((cards:any)=>{null})
     }
 
-
-    /*const handleIzposojaClick1 = () => {
-        const { knjiga_izvod_naslov, knjiga_izvod_isbn } = cardData;
-        //navigation(`/izposoja/${knjiga_izvod_naslov}/${knjiga_izvod_isbn}`);
-        navigations(`/izposoja?naslov=${knjiga_izvod_naslov}&isbn=${knjiga_izvod_isbn}`);
-    };*/
+    const toRezervacija = () => {
+        navigation(`/rezervacija/${cardData.knjiga_izvod_isbn}`);
+    }
 
     return (
         <>
@@ -33,13 +30,14 @@ const Card = ({cardData}) => {
                             <div className="btn-group1">
                                 <div>
                                     <a type="button"
-                                       className="btn btn-sm btn-outline-secondary"
+                                       className="button12 btn btn-sm btn-outline-secondary"
                                         onClick={toIzposoja}>Izposoja
                                     </a>
                                 </div>
                                 <div>
-                                    <a href="/rezervacija" type="button"
-                                       className="btn btn-sm btn-outline-secondary">Rezervacija
+                                    <a type="button"
+                                       className="btn btn-sm btn-outline-secondary"
+                                    onClick={toRezervacija}>Rezervacija
                                     </a>
                                 </div>
                             </div>

@@ -18,16 +18,9 @@ const PoisciKnjigo = () => {
         console.log(res.data._embedded.knjigaIzvodDtoList);
         setCards(res.data._embedded.knjigaIzvodDtoList);
 
-
-
         if (res.status == 201){
             setRedirect(true);
         }
-
-        if (redirect){
-            return <Navigate to={'/'}/>
-        }
-
     }
 
     useEffect(() => {
@@ -44,9 +37,13 @@ const PoisciKnjigo = () => {
         };
     }, []);
 
+    if (redirect){
+        return <Navigate to={'/'}/>
+    }
+
     return(
         <>
-            <div className="form-signin2 py-5 m-auto" style={{ minHeight: windowHeight - 1115}}>
+            <div className="form-signin2 py-5 m-auto" style={{ minHeight: 420}}>
                 <div className="button">
                     <form onSubmit={submit}>
                         <h1 className="h3 mb-3 fw-normal">Poišči knjigo</h1>
@@ -56,7 +53,7 @@ const PoisciKnjigo = () => {
                             <label htmlFor="floatingInput">Ime knjige</label>
                         </div>
                         <p></p>
-                        <button className="w-100 btn btn-lg btn-primary" type="submit">Poišči {windowHeight}</button>
+                        <button className="w-100 btn btn-lg btn-primary" type="submit">Poišči</button>
                     </form>
                     <p></p>
                 </div>

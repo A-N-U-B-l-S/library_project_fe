@@ -8,8 +8,10 @@ const Home = () => {
     const loadBlogs = async () => {
         const res =
             await axios.get('http://localhost:4545/diplomska_knjiznica/knjigaizvod');
-        //console.log(res.data._embedded.knjigaIzvodDtoList)
-        setCards(res.data._embedded.knjigaIzvodDtoList);
+
+        const BookList = res.data._embedded.knjigaIzvodDtoList;
+
+        setCards(BookList);
     }
 
     useEffect(()=>{loadBlogs()},[]);

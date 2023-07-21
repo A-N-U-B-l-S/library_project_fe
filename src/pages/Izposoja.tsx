@@ -35,7 +35,7 @@ const Izposoja = () => {
 
             const res1 =
                 await axios.post('http://localhost:4545/diplomska_knjiznica/izposoja/create_new_izposoja', data);
-            //console.log(res1);
+            console.log(res1);
 
             if (res1.status == 201){
                 setRedirect(true);

@@ -24,7 +24,7 @@ const Header = () => {
                     </ul>
 
                     <div className="col-md-3 text-end">
-                        <a href="/login" type="button" className="btn btn-outline-primary me-2">{user}</a>
+                        <a href="/userdata" type="button" className="btn btn-outline-primary me-2">{user}</a>
                         <a href="/" type="button" className="btn btn-primary link-dark" onClick={odjava}>odjava</a>
                     </div>
 

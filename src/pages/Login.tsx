@@ -5,6 +5,7 @@ import {Navigate} from "react-router-dom";
 const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+
     const [errorText, setErrorText] = useState('');
     const [redirect, setRedirect] = useState(false);
 
@@ -15,14 +16,10 @@ const Login = () => {
             'http://localhost:4545/diplomska_knjiznica/auth/login/'
             + username + "/" + password, {withCredentials: true});
 
-        //console.log(res.data.jwtToken);
         const jwtToken = res.data.jwtToken;
-        //localStorage.setItem("jwtToken", jwtToken);
-
 
         if (jwtToken.length > 0) {
             const parsedToken = JSON.parse(atob(jwtToken.split('.')[1])); // atob - decode string
-            //console.log(parsedToken.sub);
             localStorage.setItem("username", parsedToken.sub);
         }
 
@@ -31,7 +28,7 @@ const Login = () => {
                 setRedirect(true);
             }, 1000);
         }
-        if (res.status != 200){
+        if (res.status == 400){
             setErrorText('Napaka v podatkih.');
         }
     }
