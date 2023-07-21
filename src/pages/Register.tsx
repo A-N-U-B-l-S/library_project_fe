@@ -47,7 +47,7 @@ const Register = () => {
 
     return (
         <>
-            <main className="form-signin w-100 m-auto">
+            <main className="form-signin w-100 m-auto" style={{ minHeight: 1536 - 1020}}>
                 <form onSubmit={submit}>
                     <h1 className="h3 mb-3 fw-normal">Please register</h1>
                     <div className="form-floating">
@@ -74,7 +74,8 @@ const Register = () => {
                     <h2 className="error">{errorText}</h2>
                     <p></p>
                 </form>
-                <p className="h6 mb-3 fw-100">Registracija, je možna samo če ste že član knjižnice. Če še niste član se je potrebno včlaniti.</p>
+                <p className="h6 mb-3 fw-100">Registracija, je možna samo če ste že član knjižnice.</p>
+                <p className="h6 mb-3 fw-100">Če še niste član se je potrebno včlaniti.</p>
             </main>
         </>
     )

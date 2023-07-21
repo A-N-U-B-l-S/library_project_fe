@@ -3,34 +3,35 @@ import axios from 'axios'
 import {Navigate} from "react-router-dom";
 
 const Login = () => {
-
-
-    //const[email, setEmail] = useState('');
-    const[username, setUsername] = useState('');
-    const[password, setPassword] = useState('');
-
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
     const [errorText, setErrorText] = useState('');
-
     const [redirect, setRedirect] = useState(false);
 
     const submit = async (e : SyntheticEvent) => {
         e.preventDefault();
 
-
-        /*const data = {
-            email,
-            "password":password,
-        };*/
-        //console.log(data);
         const res = await axios.post(
             'http://localhost:4545/diplomska_knjiznica/auth/login/'
             + username + "/" + password, {withCredentials: true});
-        //console.log(res);
 
-        if (res.status == 201){
-            setRedirect(true);
+        //console.log(res.data.jwtToken);
+        const jwtToken = res.data.jwtToken;
+        //localStorage.setItem("jwtToken", jwtToken);
+
+
+        if (jwtToken.length > 0) {
+            const parsedToken = JSON.parse(atob(jwtToken.split('.')[1])); // atob - decode string
+            //console.log(parsedToken.sub);
+            localStorage.setItem("username", parsedToken.sub);
         }
-        if (res.status != 201){
+
+        if (res.status == 200){
+            setTimeout(()=>{
+                setRedirect(true);
+            }, 1000);
+        }
+        if (res.status != 200){
             setErrorText('Napaka v podatkih.');
         }
     }
@@ -41,16 +42,22 @@ const Login = () => {
 
     return (
         <>
-            <main className="form-signin w-100 m-auto">
+            <main className="form-signin w-100 m-auto" style={{ minHeight: 1536 - 1020}}>
                 <form onSubmit={submit}>
                     <h1 className="h3 mb-3 fw-normal">Please login</h1>
                     <div className="form-floating">
-                        <input type="Email address" className="form-control" id="floatingInput" placeholder="Name"
+                        <input type="Email address"
+                               className="form-control"
+                               id="floatingInput"
+                               placeholder="Name"
                                onChange={(e) => setUsername(e.target.value)}/>
                         <label htmlFor="floatingInput">Uporabniško ime</label>
                     </div>
                     <div className="form-floating">
-                        <input type="Password" className="form-control" id="floatingPassword" placeholder="Password"
+                        <input type="Password"
+                               className="form-control"
+                               id="floatingPassword"
+                               placeholder="Password"
                                onChange={(e) => setPassword(e.target.value)}/>
                         <label htmlFor="floatingPassword">Password</label>
                     </div>

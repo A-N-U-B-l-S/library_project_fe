@@ -1,7 +1,5 @@
 import {useNavigate} from "react-router-dom";
 
-
-
 const Card = ({cardData}) => {
 
     const navigation = useNavigate();

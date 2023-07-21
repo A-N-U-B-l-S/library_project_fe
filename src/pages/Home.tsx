@@ -22,7 +22,7 @@ const Home = () => {
                         <div className="col-lg-6 col-md-8 mx-auto">
                             <h1 className="fw-light">Sistem knjižnice</h1>
                             <p className="lead text-body-secondary">
-                                To je moj diplomski projekt za upravljanje sistema knjižnice, z uporabo java spring boot.
+                                To je moj diplomski projekt za spletni portal knjižnice.
                             </p>
                             <p>
                                 <a href="/poisciknjigo" className="btn btn-primary my-2">Poišči knjigo</a>

@@ -4,7 +4,7 @@ import {Navigate} from "react-router-dom";
 import Card from "../components/Card.tsx";
 
 const PoisciKnjigo = () => {
-    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+    const [windowHeight, setWindowHeight] = useState(window.innerWidth);
 
     const[imeKnjige, setImeKnjige] = useState('');
     const [redirect, setRedirect] = useState(false);
@@ -33,7 +33,7 @@ const PoisciKnjigo = () => {
     useEffect(() => {
         // Update window width on resize
         const handleResize = () => {
-            setWindowWidth(window.innerWidth);
+            setWindowHeight(window.innerWidth);
         };
 
         window.addEventListener('resize', handleResize);
@@ -46,7 +46,7 @@ const PoisciKnjigo = () => {
 
     return(
         <>
-            <div className="form-signin2 py-5 m-auto">
+            <div className="form-signin2 py-5 m-auto" style={{ minHeight: windowHeight - 1115}}>
                 <div className="button">
                     <form onSubmit={submit}>
                         <h1 className="h3 mb-3 fw-normal">Poišči knjigo</h1>
@@ -56,14 +56,13 @@ const PoisciKnjigo = () => {
                             <label htmlFor="floatingInput">Ime knjige</label>
                         </div>
                         <p></p>
-                        <button className="w-100 btn btn-lg btn-primary" type="submit">Poišči {windowWidth}</button>
+                        <button className="w-100 btn btn-lg btn-primary" type="submit">Poišči {windowHeight}</button>
                     </form>
                     <p></p>
                 </div>
             </div>
             <div className="py-5">
                 <div className="container">
-
                     <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                         {
                             cards.map((card:any,i)=>{
