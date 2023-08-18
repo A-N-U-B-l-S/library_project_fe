@@ -9,16 +9,17 @@ const Izposoja = () => {
 
     const [naslov, setNaslov] = useState("");
     const [datumIzdaje, setDatumIzdaje] = useState("");
+    const [knjigaImage, setKnjigaImage] = useState("");
 
     const isbn = window.location.pathname.split("/")[2];
     const user = localStorage.getItem("username");
-
     const submit = async () => {
         const res =
             await axios.get('http://localhost:4545/diplomska_knjiznica/knjigaizvod/knjigaisbn/' + isbn );
         //console.log(res.data);
         setNaslov(res.data.knjiga_izvod_naslov);
         setDatumIzdaje(res.data.knjiga_izvod_datum_izdaje);
+        setKnjigaImage(res.data.knjiga_izvod_image_path);
     }
     useEffect(()=>{submit()},[]);
 
@@ -35,7 +36,6 @@ const Izposoja = () => {
 
             const res1 =
                 await axios.post('http://localhost:4545/diplomska_knjiznica/izposoja/create_new_izposoja', data);
-            console.log(res1);
 
             if (res1.status == 201){
                 setRedirect(true);
@@ -65,12 +65,17 @@ const Izposoja = () => {
                 </div>
                 <div className="col">
                     <div className="card shadow-sm">
-                        <svg className="bd-placeholder-img card-img-top" width="100%" height="225"
-                             xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail"
-                             preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title>
-                            <rect width="100%" height="100%" fill="#55595c"/>
-                            <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
-                        </svg>
+                        <div style={{
+                            paddingLeft: '30%',
+                            paddingRight: '30%',
+                            paddingTop: '3%',
+                            paddingBottom: '3%',
+                            backgroundColor: "lightgray " }}>
+                            <img className="bd-placeholder-img card-img-top"
+                                 src= {knjigaImage}
+                                 width="100%"
+                                 height="250"/>
+                        </div>
                         <div className="card-body">
                             <p className="card-text">Naslov: {naslov}</p>
                             <p className="card-text">Datum izdaje: {datumIzdaje}</p>

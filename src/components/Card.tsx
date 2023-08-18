@@ -1,12 +1,10 @@
 import {useNavigate} from "react-router-dom";
 
 const Card = ({cardData}) => {
-
     const navigation = useNavigate();
 
     const toIzposoja = () => {
         navigation(`/izposoja/${cardData.knjiga_izvod_isbn}`);
-        //console.log(cardData)
         //knjiga.map((cards:any)=>{null})
     }
 
@@ -14,16 +12,22 @@ const Card = ({cardData}) => {
         navigation(`/rezervacija/${cardData.knjiga_izvod_isbn}`);
     }
 
-    return (
+        return (
         <>
             <div className="col">
                 <div className="card shadow-sm">
-                    <svg className="bd-placeholder-img card-img-top" width="100%" height="225"
-                         xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail"
-                         preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title>
-                        <rect width="100%" height="100%" fill="#55595c"/>
-                        <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
-                    </svg>
+                    <div style={{
+                        paddingLeft: '25%',
+                        paddingRight: '25%',
+                        paddingTop: '3%',
+                        paddingBottom: '3%',
+                        backgroundColor: "lightgray " }}>
+                        <img className="bd-placeholder-img card-img-top"
+                             src={cardData.knjiga_izvod_image_path}
+                             width="100%"
+                             height="250"/>
+                    </div>
+
                     <div className="card-body">
                         <p className="card-text">{cardData.knjiga_izvod_naslov}</p>
                         <div className="btn-group">

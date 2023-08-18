@@ -9,16 +9,19 @@ const Rezervacija = () => {
 
     const [naslov, setNaslov] = useState("");
     const [datumIzdaje, setDatumIzdaje] = useState("");
+    const [knjigaImage, setKnjigaImage] = useState("");
 
     const isbn = window.location.pathname.split("/")[2];
     const user = localStorage.getItem("username");
 
+    const imageUrl = "https://m.media-amazon.com/images/I/71-++hbbERL.jpg";
+
     const submit = async () => {
         const res =
             await axios.get('http://localhost:4545/diplomska_knjiznica/knjigaizvod/knjigaisbn/' + isbn );
-        //console.log(res.data);
         setNaslov(res.data.knjiga_izvod_naslov);
         setDatumIzdaje(res.data.knjiga_izvod_datum_izdaje);
+        setKnjigaImage(res.data.knjiga_izvod_image_path);
     }
     useEffect(()=>{submit()},[]);
 
@@ -34,8 +37,7 @@ const Rezervacija = () => {
             data.knjiga_izvod_isbn = isbn;
 
             const res1 =
-                await axios.post('http://localhost:4545/diplomska_knjiznica/rezervacija/çreate_ner_rezervacija', data);
-            console.log(res1);
+                await axios.post('http://localhost:4545/diplomska_knjiznica/rezervacija/çreate_new_rezervacija', data);
 
             if (res1.status == 201){
                 setRedirect(true);
@@ -65,12 +67,18 @@ const Rezervacija = () => {
                 </div>
                 <div className="col">
                     <div className="card shadow-sm">
-                        <svg className="bd-placeholder-img card-img-top" width="100%" height="225"
-                             xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail"
-                             preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title>
-                            <rect width="100%" height="100%" fill="#55595c"/>
-                            <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
-                        </svg>
+                        <div style={{
+                            paddingLeft: '30%',
+                            paddingRight: '30%',
+                            paddingTop: '3%',
+                            paddingBottom: '3%',
+                            backgroundColor: "lightgray " }}>
+                            <img className="bd-placeholder-img card-img-top"
+                                 src= {knjigaImage}
+                                 width="100%"
+                                 height="250"
+                                 alt="Harry Potter Book Cover" />
+                        </div>
                         <div className="card-body">
                             <p className="card-text">Naslov: {naslov}</p>
                             <p className="card-text">Datum izdaje: {datumIzdaje}</p>

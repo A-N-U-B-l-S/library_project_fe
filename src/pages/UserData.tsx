@@ -18,9 +18,6 @@ const UserData = () => {
 
         const res1 =
             await axios.get('http://localhost:4545/diplomska_knjiznica/oseba/email/' + res.data.oseba_email);
-
-        //console.log(res.data);
-        //console.log(res1.data);
         setIme(res1.data.oseba_ime)
         setPriimek(res1.data.oseba_priimek)
         setTelefon(res1.data.oseba_telefon)

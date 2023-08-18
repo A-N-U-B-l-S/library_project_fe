@@ -12,11 +12,17 @@ const Login = () => {
     const submit = async (e : SyntheticEvent) => {
         e.preventDefault();
 
+        const userData = {
+            username,
+            password
+        };
+
         const res = await axios.post(
-            'http://localhost:4545/diplomska_knjiznica/auth/login/'
-            + username + "/" + password, {withCredentials: true});
+            'http://localhost:4545/diplomska_knjiznica/auth/login',
+            userData);
 
         const jwtToken = res.data.jwtToken;
+        console.log(jwtToken);
 
         if (jwtToken.length > 0) {
             const parsedToken = JSON.parse(atob(jwtToken.split('.')[1])); // atob - decode string
@@ -41,7 +47,7 @@ const Login = () => {
         <>
             <main className="form-signin w-100 m-auto" style={{ minHeight: 1536 - 1020}}>
                 <form onSubmit={submit}>
-                    <h1 className="h3 mb-3 fw-normal">Please login</h1>
+                    <h1 className="h3 mb-3 fw-normal">Prijava</h1>
                     <div className="form-floating">
                         <input type="Email address"
                                className="form-control"

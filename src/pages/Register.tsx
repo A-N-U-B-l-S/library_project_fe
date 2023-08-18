@@ -3,7 +3,6 @@ import axios from 'axios'
 import {Navigate} from "react-router-dom";
 
 const Register = () => {
-
     const[uporabniskoIme, setUporabniskoIme] = useState('');
     const[email, setEmail] = useState('');
     const[geslo, setGeslo] = useState('');
@@ -21,20 +20,20 @@ const Register = () => {
         }
 
         if (geslo == geslo2){
-            /*const data = {
-                "uporabniski_racun_uporabnisko_ime":uporabniskoIme,
-                "uporabniski_racun_geslo":geslo,
-                "oseba_email":email,
-            };*/
+            const userData = {
+                "email": email,
+                "username": uporabniskoIme,
+                "password": geslo
+            };
+
             const res = await axios.post(
-                'http://localhost:4545/diplomska_knjiznica/auth/register/'
-                + email + "/" + uporabniskoIme + "/" + geslo);
+                'http://localhost:4545/diplomska_knjiznica/auth/register',
+                userData);
             // console.log(res.status);
             if (res.status != 201){
                 setErrorText('Napaka v registracijskih podatkih.')
             }
             if (res.status == 201){
-                //redirect na login
                 setRedirect(true)
             }
         }
@@ -49,7 +48,7 @@ const Register = () => {
         <>
             <main className="form-signin w-100 m-auto" style={{ minHeight: 1536 - 1020}}>
                 <form onSubmit={submit}>
-                    <h1 className="h3 mb-3 fw-normal">Please register</h1>
+                    <h1 className="h3 mb-3 fw-normal">Registracija</h1>
                     <div className="form-floating">
                         <input type="Email address" className="form-control" id="floatingInput" placeholder="name"
                                onChange={(e) => setUporabniskoIme(e.target.value)}/>
