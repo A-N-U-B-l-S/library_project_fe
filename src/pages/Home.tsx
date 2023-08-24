@@ -3,19 +3,15 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 
 const Home = () => {
-    const [cards, setCards] = useState([]);
+    const [cards, setCards] = useState<knjiga[]>([]);
 
-    const loadBlogs = async () => {
+    const getBooks = async () => {
         const res =
             await axios.get('http://localhost:4545/diplomska_knjiznica/knjigaizvod');
-            //console.log(res.data._embedded)
-
-        const BookList = res.data._embedded.knjigaIzvodDtoList;
-
-        setCards(BookList);
+        setCards(res.data._embedded.knjigaIzvodDtoList);
     }
 
-    useEffect(()=>{loadBlogs() },[]);
+    useEffect(()=>{getBooks() },[]);
 
     return (
         <>
@@ -38,7 +34,7 @@ const Home = () => {
                     <div className="container">
                         <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                             {
-                                cards.map((card:any,i)=>{
+                                cards.map((card:knjiga,i)=>{
                                     return <Card cardData={card} key={i}/>;
                                 })
                             }

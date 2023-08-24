@@ -7,10 +7,14 @@ const Register = () => {
     const[email, setEmail] = useState('');
     const[geslo, setGeslo] = useState('');
     const[geslo2, setGeslo2] = useState('');
-
     const [errorText, setErrorText] = useState('');
-
     const [redirect, setRedirect] = useState(false);
+
+    const userData = {
+        email,
+        uporabniskoIme,
+        geslo
+    };
 
     const submit = async (e : SyntheticEvent) => {
         e.preventDefault();
@@ -20,16 +24,8 @@ const Register = () => {
         }
 
         if (geslo == geslo2){
-            const userData = {
-                "email": email,
-                "username": uporabniskoIme,
-                "password": geslo
-            };
-
             const res = await axios.post(
-                'http://localhost:4545/diplomska_knjiznica/auth/register',
-                userData);
-            // console.log(res.status);
+                'http://localhost:4545/diplomska_knjiznica/auth/register', userData);
             if (res.status != 201){
                 setErrorText('Napaka v registracijskih podatkih.')
             }
@@ -37,7 +33,6 @@ const Register = () => {
                 setRedirect(true)
             }
         }
-
     }
 
     if (redirect){

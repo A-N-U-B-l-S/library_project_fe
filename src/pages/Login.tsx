@@ -5,24 +5,21 @@ import {Navigate} from "react-router-dom";
 const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-
     const [errorText, setErrorText] = useState('');
     const [redirect, setRedirect] = useState(false);
+
+    const userData = {
+        username,
+        password
+    };
 
     const submit = async (e : SyntheticEvent) => {
         e.preventDefault();
 
-        const userData = {
-            username,
-            password
-        };
-
         const res = await axios.post(
-            'http://localhost:4545/diplomska_knjiznica/auth/login',
-            userData);
+            'http://localhost:4545/diplomska_knjiznica/auth/login', userData);
 
         const jwtToken = res.data.jwtToken;
-        console.log(jwtToken);
 
         if (jwtToken.length > 0) {
             const parsedToken = JSON.parse(atob(jwtToken.split('.')[1])); // atob - decode string

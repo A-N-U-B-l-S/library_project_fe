@@ -7,7 +7,6 @@ const UserData = () => {
     const [priimek, setPriimek] = useState("");
     const [telefon, setTelefon] = useState("");
     const [izkaznica, setIzkaznica] = useState("");
-
     const username = localStorage.getItem("username");
 
     const submitUser = async () => {

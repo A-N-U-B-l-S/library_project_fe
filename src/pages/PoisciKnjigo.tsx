@@ -1,45 +1,34 @@
 import {SyntheticEvent, useEffect, useState} from "react";
 import axios from "axios";
-import {Navigate} from "react-router-dom";
 import Card from "../components/Card.tsx";
 
 const PoisciKnjigo = () => {
-    const [windowHeight, setWindowHeight] = useState(window.innerWidth);
-
     const[imeKnjige, setImeKnjige] = useState('');
-    const [redirect, setRedirect] = useState(false);
-    const [cards, setCards] = useState([]);
+    const [cards, setCards] = useState<knjiga[]>([]);
+    const [seznamKnjig, setSeznamKnjig] = useState<knjiga[]>([]);
 
     const submit = async (e : SyntheticEvent) => {
         e.preventDefault();
 
-        const res =
-            await axios.get('http://localhost:4545/diplomska_knjiznica/knjigaizvod/knjiganaslov/' + imeKnjige);
-        console.log(res.data._embedded.knjigaIzvodDtoList);
-        setCards(res.data._embedded.knjigaIzvodDtoList);
+        const seznam : knjiga[] = [];
 
-        if (res.status == 201){
-            setRedirect(true);
+        if (imeKnjige != null && imeKnjige.length > 1){
+            for (let i = 0; i < seznamKnjig.length; i++) {
+                if (seznamKnjig[i].knjiga_izvod_naslov.toLowerCase().includes(imeKnjige.toLowerCase())){
+                    seznam.push(seznamKnjig[i]);
+                }
+            }
         }
+        setCards(seznam);
     }
 
-    useEffect(() => {
-        // Update window width on resize
-        const handleResize = () => {
-            setWindowHeight(window.innerWidth);
-        };
-
-        window.addEventListener('resize', handleResize);
-
-        // Cleanup event listener on component unmount
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    }, []);
-
-    if (redirect){
-        return <Navigate to={'/'}/>
+    const getAllBooks = async () => {
+        const res =
+            await axios.get('http://localhost:4545/diplomska_knjiznica/knjigaizvod');
+        setSeznamKnjig(res.data._embedded.knjigaIzvodDtoList);
     }
+
+    useEffect(() => {getAllBooks()}, []);
 
     return(
         <>
@@ -62,7 +51,7 @@ const PoisciKnjigo = () => {
                 <div className="container">
                     <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                         {
-                            cards.map((card:any,i)=>{
+                            cards.map((card:knjiga,i)=>{
                                 return <Card cardData={card} key={i}/>;
                             })
                         }

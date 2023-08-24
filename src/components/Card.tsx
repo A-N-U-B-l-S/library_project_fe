@@ -1,11 +1,10 @@
 import {useNavigate} from "react-router-dom";
 
-const Card = ({cardData}) => {
+const Card= ({cardData} : {cardData : knjiga}) => {
     const navigation = useNavigate();
 
     const toIzposoja = () => {
         navigation(`/izposoja/${cardData.knjiga_izvod_isbn}`);
-        //knjiga.map((cards:any)=>{null})
     }
 
     const toRezervacija = () => {

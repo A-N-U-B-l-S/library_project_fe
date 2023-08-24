@@ -6,15 +6,17 @@ import {Navigate} from "react-router-dom";
 const Rezervacija = () => {
     const [errorText, setErrorText] = useState('');
     const [redirect, setRedirect] = useState(false);
-
     const [naslov, setNaslov] = useState("");
     const [datumIzdaje, setDatumIzdaje] = useState("");
     const [knjigaImage, setKnjigaImage] = useState("");
-
     const isbn = window.location.pathname.split("/")[2];
     const user = localStorage.getItem("username");
 
-    const imageUrl = "https://m.media-amazon.com/images/I/71-++hbbERL.jpg";
+    const data = {
+        rezervacija_opomba: "string",
+        user_username: "string",
+        knjiga_izvod_isbn: "string"
+    };
 
     const submit = async () => {
         const res =
@@ -23,15 +25,10 @@ const Rezervacija = () => {
         setDatumIzdaje(res.data.knjiga_izvod_datum_izdaje);
         setKnjigaImage(res.data.knjiga_izvod_image_path);
     }
+
     useEffect(()=>{submit()},[]);
 
     const izposodiKnjigo = async () => {
-        const data = {
-            rezervacija_opomba: "string",
-            user_username: "string",
-            knjiga_izvod_isbn: "string"
-        };
-
         if (user && isbn){
             data.user_username = user;
             data.knjiga_izvod_isbn = isbn;
