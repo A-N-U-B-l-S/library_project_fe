@@ -14,7 +14,7 @@ const Home = () => {
         const res =
             await axios.get('http://localhost:4545/diplomska_knjiznica/knjigaizvod');
         const allBooks = res.data._embedded.knjigaIzvodDtoList;
-        const randomBooks = getRandomBooks(allBooks, 5);
+        const randomBooks = getRandomBooks(allBooks, 6);
         setCards(randomBooks);
     }
 
