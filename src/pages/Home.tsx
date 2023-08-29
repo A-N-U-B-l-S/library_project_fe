@@ -5,10 +5,17 @@ import axios from "axios";
 const Home = () => {
     const [cards, setCards] = useState<knjiga[]>([]);
 
+    const getRandomBooks = (bookList : knjiga[], count : number) => {
+        const shuffledBooks = [...bookList].sort(() => 0.5 - Math.random());
+        return shuffledBooks.slice(0, count);
+    };
+
     const getBooks = async () => {
         const res =
             await axios.get('http://localhost:4545/diplomska_knjiznica/knjigaizvod');
-        setCards(res.data._embedded.knjigaIzvodDtoList);
+        const allBooks = res.data._embedded.knjigaIzvodDtoList;
+        const randomBooks = getRandomBooks(allBooks, 5);
+        setCards(randomBooks);
     }
 
     useEffect(()=>{getBooks() },[]);

@@ -50,12 +50,12 @@ const Register = () => {
                         <label htmlFor="floatingInput">Uporabniško ime</label>
                     </div>
                     <div className="form-floating">
-                        <input type="Email address" className="form-control" id="floatingInput" placeholder="surname"
+                        <input type="Password" className="form-control" id="floatingInput" placeholder="surname"
                                onChange={(e) => setEmail(e.target.value)}/>
                         <label htmlFor="floatingInput">E-mail</label>
                     </div>
                     <div className="form-floating">
-                        <input type="Password" className="form-control" id="floatingPassword" placeholder="Password"
+                        <input type="Email address" className="form-control" id="floatingPassword" placeholder="Password"
                                onChange={(e) => setGeslo(e.target.value)}/>
                         <label htmlFor="floatingPassword">Geslo</label>
                     </div>

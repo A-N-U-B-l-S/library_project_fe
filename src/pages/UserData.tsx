@@ -24,9 +24,7 @@ const UserData = () => {
     }
 
 
-    useEffect(()=>{
-        submitUser()
-    },[]);
+    useEffect(()=>{submitUser()},[]);
 
     return(
         <>
